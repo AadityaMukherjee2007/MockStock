@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block body %}
-    <h1 class="text-2xl">{{ CompanyData.name }}</h1>
+    <h1 id="company_name" class="text-2xl">{{ CompanyData.name }}</h1>
+    <input id="company_id" type="hidden" value="{{ CompanyData.id }}">
     <div>
         <div class="flex flex-col p-3">
             <div class="flex  mt-3 mb-1">
@@ -12,7 +13,7 @@
             </div>
             <div class="flex justify-around mb-3">
                 <span class="text-lg p-2">Base Price: <span class="text-green-500">₹{{ CompanyData.baseVal }}</span></span>
-                <span class="text-lg p-2">Current Price: <span class="
+                <span class="text-lg p-2">Current Price: <span id="curVal" class="
                     {% if CompanyData.baseVal <= CompanyData.curVal %}
                         text-green-500
                     {% else %}
@@ -25,8 +26,8 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <form class="flex flex-col items-center p-5 m-5 shadow-lg rounded-lg w-64 bg-white">
-                {% csrf_token %}
+            <form id="priceUpdateForm" class="flex flex-col items-center p-5 m-5 shadow-lg rounded-lg w-64 bg-white">
+                <!-- {% csrf_token %} -->
                 <label for="{{ price_form.price.id_for_label }}" class="text-gray-700 font-semibold mb-2">
                     Update Current Price
                 </label>
@@ -34,6 +35,7 @@
                 {{ price_form.price }}
                 
                 <input 
+                    id="price_update_btn",
                     type="submit" 
                     value="Update Price" 
                     class="rounded px-3 py-2 m-3 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-200 cursor-pointer"
