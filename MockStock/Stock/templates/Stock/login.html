@@ -1,0 +1,24 @@
+{% include "Stock/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <form class="flex flex-col items-center">
+
+        {% csrf_token %}
+
+        <select id="company_name" class="border shadow-lg p-1 m-5 rounded text-lg" name="company" placeholder="Company Name" required> 
+            {% if companies %}
+                {% for company in companies %}
+                    <option value="{{ company }}">{{ company }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+
+        <input style="display: none;" id="admin_passwd" class="rounded border shadow-lg p-2" type="password" placeholder="Admin Password">
+
+        <input type="submit" class="bg-gray-200 px-3 py-2 m-3 shadow-lg rounded hover:bg-gray-300" value="Login">
+    </form>
+
+    <script src="{% static 'Stock/login.js' %}"></script>
+{% endblock %}
