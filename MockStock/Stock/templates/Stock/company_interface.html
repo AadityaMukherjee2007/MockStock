@@ -42,9 +42,15 @@
                 >
             </form>
         </div>
-        <div class="flex justify-between p-3 m-3">
-            
-        </div>
+    </div>
+    <div id="teams" class="flex flex-row flex-wrap justify-around p-3 m-3">
+        {% for team in Teams %}
+            <div class="rounded-md border border-gray-200 p-3 m-3 shadow-lg">
+                <div>{{ team.name }}</div>
+                {{share_alloc_form}}
+                <button class="rounded px-2 py-1 mx-2 bg-blue-500 hover:bg-blue-600 text-white" >Allocate</button>
+            </div>
+        {% endfor %}
     </div>
     <script src="{% static 'Stock/company_interface.js' %}"></script>
 {% endblock %}

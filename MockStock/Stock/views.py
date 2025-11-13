@@ -1,3 +1,5 @@
+from email.policy import default
+from logging import PlaceHolder
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django import forms
@@ -15,11 +17,25 @@ class PriceUpdateForm(forms.Form):
         widget=forms.NumberInput(
             attrs={
                 "id": "update_price",
-                "class": "border p-2 rounded shadow-md focus:ring-2 focus:ring-blue-400 w-40 text-center",
+                "class": "border p-2 rounded shadow-md w-40 text-center",
                 "placeholder": "Enter new price",
             }
         )
     )
+
+class ShareAllocationForm(forms.Form):
+    shares = forms.IntegerField(
+        min_value=0,
+        label="",
+        widget=forms.NumberInput(
+            attrs={
+                "id": "allocate_shares",
+                "class": "border px-2 py-1 m-2 rounded shadow-md  w-32 text-center",
+                "placeholder": "Enter shares",
+            }
+        )
+    )
+
 
 def index(request):
     return HttpResponseRedirect(reverse("login"))
@@ -39,12 +55,12 @@ def company_interface(request, company_name):
         return render(request, "Stock/admin.html")
 
     company_data = Company.objects.get(name=company_name)
-    updatedForm = PriceUpdateForm(initial={'price': company_data.curVal})
 
     return render(request, "Stock/company_interface.html", {
         "CompanyData": company_data,
         "Teams": Team.objects.all(),
-        "price_form": updatedForm
+        "price_form": PriceUpdateForm(initial={'price': company_data.curVal}),
+        "share_alloc_form": ShareAllocationForm()
     })
 
 def admin_interface(request):
@@ -72,3 +88,6 @@ def share_price_update(request):
     return JsonResponse({
         "message": "Updated"
     })
+
+
+# def allocate_shares(request):
