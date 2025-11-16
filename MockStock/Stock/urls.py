@@ -8,5 +8,6 @@ urlpatterns = [
     path("company_interface/<str:company_name>", views.company_interface, name="company_interface"),
     path("admin_interface", views.admin_interface, name="admin_interface"),
     path("priceUpdate", views.share_price_update, name="priceUpdate"),
-    path("allocate_shares", views.allocate_shares, name="allocate_shares")
+    path("allocate_shares", views.allocate_shares, name="allocate_shares"),
+    path("get_comapny_data", views.get_company_data, name="getcompany_data")
 ]

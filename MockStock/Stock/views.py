@@ -145,5 +145,8 @@ def get_company_data(request):
     company_data = Company.objects.get(name=request.GET.get("company"))
 
     return JsonResponse({
-        "baseQty": c
+        "baseQty": company_data.baseQty,
+        "curQty": company_data.curQty,
+        "baseVal": company_data.baseVal,
+        "curVal": company_data.curVal
     })
