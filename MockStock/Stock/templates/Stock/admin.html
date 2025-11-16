@@ -2,4 +2,15 @@
 
 {% block body %}
     <h1 class="text-2xl">Admin</h1>
+    <div class="flex flex-row justify-between flex-wrap p-3">
+        {% for team in Teams %}
+            <div class="shadow-lg p-5 m-4 flex flex-col rounded-lg w-50">
+                <div>{{ team }}</div>
+                <div>Corpus: ₹{{ team.corpus }}</div>
+                <div>Portfolio: ₹{{ team.portfolio }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% url 'static/company_interface.js' %}"
 {% endblock %}

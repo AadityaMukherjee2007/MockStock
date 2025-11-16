@@ -1,5 +1,9 @@
 // window.alert("script loaded");
 
+function update_data() {
+     
+}
+
 document.getElementById("update_price").onchange = (event) => {
     event.preventDefault();
     const updated_price = document.getElementById("update_price");
@@ -35,3 +39,19 @@ document.getElementById("priceUpdateForm").onsubmit = (event) => {
             window.location.reload();
     })
 };
+
+document.getElementById("share_alloc_form").onsubmit = (event) => {
+    // event.preventDefault();
+
+    const numberOfShares = document.getElementById("allocate_shares").value;
+    const team = document.getElementById("team_name");
+    const company = document.getElementById("company_name");
+
+    fetch(`allocate_shares?team=${team}&company=${company}&number=${numberOfShares}`)
+    .then(request => request.json())
+    .then(data => {
+        console.log(data);
+        window.location.reload();
+    });
+    // alert("Form submitted");
+}
