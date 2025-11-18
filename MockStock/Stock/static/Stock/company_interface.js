@@ -44,14 +44,20 @@ document.getElementById("share_alloc_form").onsubmit = (event) => {
     // event.preventDefault();
 
     const numberOfShares = document.getElementById("allocate_shares").value;
-    const team = document.getElementById("team_name");
-    const company = document.getElementById("company_name");
+    const team = document.getElementById("team_name").value;
+    const company = document.getElementById("company_name").innerHTML;
 
-    fetch(`allocate_shares?team=${team}&company=${company}&number=${numberOfShares}`)
+    // console.log(numberOfShares, team, company);
+    console.log(`allocate_shares?team=${team}&company=${company}&number=${numberOfShares}`);
+    // alert(numberOfShares, team, company);
+
+
+    fetch(`/allocate_shares?team=${team}&company=${company}&number=${numberOfShares}`)
     .then(request => request.json())
     .then(data => {
         console.log(data);
         window.location.reload();
     });
+
     // alert("Form submitted");
 }

@@ -1,5 +1,7 @@
 {% extends 'Stock/layout.html' %}
 
+{% load static %}
+
 {% block body %}
     <h1 class="text-2xl">Admin</h1>
     <div class="flex flex-row justify-between flex-wrap p-3">
@@ -12,5 +14,5 @@
         {% endfor %}
     </div>
 
-    <script src="{% url 'static/company_interface.js' %}"
+    <script src="{% static 'Stock/company_interface.js' %}"></script>
 {% endblock %}

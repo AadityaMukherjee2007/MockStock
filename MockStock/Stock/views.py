@@ -99,7 +99,7 @@ def allocate_shares(request):
 
     team = request.GET.get("team")
     company = request.GET.get("company")
-    number = request.GET.get("number")
+    number = int(request.GET.get("number"))
 
     # print(team, company, number)
 
@@ -121,9 +121,9 @@ def allocate_shares(request):
     team.save()
 
     allocation, created = ShareAllocation.objects.get_or_create(
-        team = team, 
-        company = company,
-        default={"shares": 0}
+        team = team.name, 
+        company = company.name,
+        defaults={"shares": 0}
     )
 
     allocation.shares += number
